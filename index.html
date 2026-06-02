@@ -1,248 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Milf Night</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MILF NIGHT — The Greatest Rock Band to Never Exist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#0a0a0a;
+  --bone:#f4efe6;
+  --blood:#ff1f3d;
+  --acid:#e8ff2e;
+  --hot:#ff5ca8;
+  --steel:#1c1c22;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--bone);
+  font-family:'Space Mono',monospace;
+  overflow-x:hidden;
+}
+/* grain overlay */
+body::after{
+  content:"";
+  position:fixed;inset:0;
+  pointer-events:none;z-index:9999;
+  opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.02em;line-height:.92}
 
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;600&display=swap"
-    rel="stylesheet"
-  />
+/* MARQUEE TICKER */
+.ticker{
+  background:var(--blood);color:var(--ink);
+  border-top:4px solid var(--ink);border-bottom:4px solid var(--ink);
+  overflow:hidden;white-space:nowrap;padding:10px 0;
+  font-family:'Archivo Black',sans-serif;font-size:.95rem;letter-spacing:.1em;
+  position:sticky;top:0;z-index:100;
+}
+.ticker span{display:inline-block;animation:slide 22s linear infinite;padding-left:100%}
+@keyframes slide{to{transform:translateX(-100%)}}
 
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="styles.css" />
+/* HERO */
+.hero{
+  min-height:92vh;display:flex;flex-direction:column;justify-content:center;
+  position:relative;text-align:center;padding:80px 24px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,31,61,.25), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(232,255,46,.18), transparent 45%),
+    repeating-linear-gradient(45deg, #0d0d0f 0 22px, #0a0a0a 22px 44px);
+}
+.hero .smol{font-family:'Space Mono';letter-spacing:.5em;font-size:.8rem;color:var(--acid);margin-bottom:18px}
+.hero h1{
+  font-size:clamp(4rem,18vw,15rem);
+  color:var(--bone);
+  text-shadow:6px 6px 0 var(--blood), 12px 12px 0 var(--ink);
+  animation:wobble 4s ease-in-out infinite;
+}
+.hero h1 .night{color:var(--blood);text-shadow:6px 6px 0 var(--acid),12px 12px 0 var(--ink)}
+@keyframes wobble{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1deg)}}
+.tagline{
+  margin-top:26px;font-family:'Archivo Black',sans-serif;font-size:clamp(1rem,2.5vw,1.6rem);
+  color:var(--bone);text-transform:uppercase;
+}
+.tagline em{color:var(--hot);font-style:normal}
+.hero-cta{margin-top:40px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{
+  font-family:'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:.05em;
+  padding:16px 30px;border:3px solid var(--bone);background:var(--bone);color:var(--ink);
+  text-decoration:none;font-size:.95rem;transition:.15s;cursor:pointer;display:inline-block;
+}
+.btn:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--blood)}
+.btn.ghost{background:transparent;color:var(--bone)}
+.btn.ghost:hover{box-shadow:6px 6px 0 var(--acid);background:var(--acid);color:var(--ink);border-color:var(--acid)}
 
-  <!-- Favicons & Web Manifest -->
-  <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="images/MILF_NIGHT-192x192.png" />
-  <link rel="apple-touch-icon" sizes="192x192" href="images/MILF_NIGHT-192x192.png" />
-  <link rel="manifest" href="manifest.json" />
+/* SECTION HEADERS */
+section{padding:90px 0;border-top:5px solid var(--ink)}
+.shead{font-size:clamp(2.5rem,7vw,6rem);margin-bottom:14px}
+.shead .stroke{
+  color:transparent;-webkit-text-stroke:2px var(--bone);
+}
+.kicker{font-family:'Space Mono';color:var(--acid);letter-spacing:.4em;font-size:.75rem;margin-bottom:8px}
+
+/* MEMBER */
+.member{background:var(--steel)}
+.member .grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.poster{
+  aspect-ratio:3/4;border:5px solid var(--bone);
+  background:linear-gradient(135deg,var(--blood),var(--hot));
+  display:flex;align-items:center;justify-content:center;position:relative;
+  box-shadow:14px 14px 0 var(--acid);
+}
+.poster .name{font-family:'Anton';font-size:clamp(2rem,5vw,3.5rem);color:var(--ink);transform:rotate(-90deg);white-space:nowrap;text-transform:uppercase}
+.roles{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.roles span{border:2px solid var(--bone);padding:5px 12px;font-size:.8rem;text-transform:uppercase}
+.roles span:nth-child(3n){background:var(--blood);border-color:var(--blood);color:var(--ink)}
+.roles span:nth-child(5n){background:var(--acid);border-color:var(--acid);color:var(--ink)}
+.member h3{font-size:clamp(2rem,5vw,3.6rem);color:var(--acid)}
+
+/* MUSIC */
+.music{background:var(--ink)}
+.bio{max-width:760px;font-size:1.05rem;line-height:1.7;color:#cfc9be;margin:20px 0 50px}
+.songs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.song{border:3px solid var(--bone);padding:26px;background:var(--steel);transition:.15s}
+.song:hover{transform:translateY(-6px);box-shadow:10px 10px 0 var(--hot)}
+.song .num{font-family:'Anton';font-size:3rem;color:var(--blood);line-height:1}
+.song h4{font-family:'Anton';font-size:1.5rem;margin:10px 0 16px;text-transform:uppercase}
+.song audio{width:100%;filter:invert(1) hue-rotate(180deg)}
+.socials{display:flex;gap:18px;margin-top:46px}
+.socials a{
+  font-family:'Archivo Black';text-transform:uppercase;letter-spacing:.05em;
+  border:3px solid var(--bone);padding:14px 24px;text-decoration:none;color:var(--bone);transition:.15s;font-size:.85rem;
+}
+.socials a:hover{background:var(--bone);color:var(--ink);transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--blood)}
+
+/* TOUR */
+.tour{background:var(--steel)}
+.pricing{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0 40px}
+.pricing span{font-family:'Archivo Black';padding:10px 18px;border:3px solid var(--bone);text-transform:uppercase;font-size:.85rem}
+.pricing .vip{background:var(--acid);color:var(--ink);border-color:var(--acid)}
+.tour-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.month{border:3px solid var(--bone);background:var(--ink)}
+.month h3{background:var(--blood);color:var(--ink);padding:14px 18px;font-size:1.8rem}
+.dates{list-style:none;padding:10px}
+.dates li{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 14px;border-bottom:1px solid #333;cursor:pointer;transition:.12s;
+}
+.dates li:last-child{border-bottom:none}
+.dates li:hover{background:var(--bone);color:var(--ink);padding-left:22px}
+.dates .city{font-family:'Archivo Black';text-transform:uppercase;font-size:.9rem}
+.dates .day{font-family:'Anton';font-size:1.3rem;color:var(--acid)}
+.dates li:hover .day{color:var(--blood)}
+.dates .so{font-size:.65rem;background:var(--blood);color:var(--ink);padding:3px 8px;font-family:'Archivo Black';text-transform:uppercase}
+.dates li:hover .so{background:var(--ink);color:var(--acid)}
+.selinfo{margin-top:30px;font-family:'Archivo Black';font-size:1.1rem;color:var(--acid);min-height:1.4em;text-transform:uppercase}
+
+/* MERCH */
+.merch{background:var(--ink)}
+.merch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+.mcard{border:3px solid var(--bone);background:var(--steel);position:relative;overflow:hidden}
+.mart{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-family:'Anton';font-size:2.2rem;text-align:center;color:var(--ink);padding:20px;text-transform:uppercase}
+.mcard:nth-child(1) .mart{background:repeating-linear-gradient(45deg,var(--blood) 0 18px,#d4001f 18px 36px)}
+.mcard:nth-child(2) .mart{background:repeating-linear-gradient(-45deg,var(--acid) 0 18px,#cfe600 18px 36px)}
+.mcard:nth-child(3) .mart{background:repeating-linear-gradient(45deg,var(--hot) 0 18px,#e64f96 18px 36px)}
+.soldout{
+  position:absolute;inset:0;background:rgba(10,10,10,.72);
+  display:flex;align-items:center;justify-content:center;
+}
+.soldout span{font-family:'Anton';font-size:2.4rem;color:var(--blood);border:4px solid var(--blood);padding:10px 22px;transform:rotate(-12deg);text-transform:uppercase}
+.minfo{padding:20px}
+.minfo h4{font-family:'Anton';font-size:1.35rem;text-transform:uppercase}
+.minfo p{color:#aaa;font-size:.85rem;margin:6px 0}
+.minfo .price{font-family:'Archivo Black';color:var(--acid);font-size:1.1rem}
+
+/* TESTIMONIALS */
+.fans{background:var(--steel);text-align:center}
+.quote{max-width:820px;margin:40px auto 0;min-height:200px;display:flex;flex-direction:column;justify-content:center}
+.quote blockquote{font-family:'Anton';font-size:clamp(1.6rem,4vw,3rem);line-height:1.1;text-transform:uppercase}
+.quote blockquote::before{content:"“";color:var(--blood)}
+.quote blockquote::after{content:"”";color:var(--blood)}
+.quote cite{display:block;margin-top:24px;font-family:'Space Mono';color:var(--acid);letter-spacing:.2em;font-size:.85rem}
+.dots{display:flex;gap:12px;justify-content:center;margin-top:36px}
+.dots button{width:16px;height:16px;border:2px solid var(--bone);background:transparent;cursor:pointer;border-radius:50%;transition:.15s}
+.dots button.on{background:var(--blood);border-color:var(--blood)}
+
+/* CONTACT */
+.contact{background:var(--ink);text-align:center}
+.contact a.email{font-family:'Anton';font-size:clamp(1.5rem,4vw,2.8rem);color:var(--acid);text-decoration:none;display:inline-block;margin-top:16px;word-break:break-all}
+.contact a.email:hover{color:var(--blood)}
+footer{margin-top:60px;padding-top:30px;border-top:1px solid #333;color:#777;font-size:.8rem;letter-spacing:.1em}
+
+@media(max-width:760px){
+  .member .grid{grid-template-columns:1fr}
+  .poster .name{transform:none;font-size:2rem}
+}
+</style>
 </head>
 <body>
-  <!-- HEADER / HERO -->
-  <header class="panel header-panel">
-    <div class="container">
-      <img src="images/milfNight.png" alt="Milf Night Logo" class="logo" />
-      <p class="tagline">The Greatest Rock Band to Never Exist</p>
-    </div>
-  </header>
 
-  <!-- BAND MEMBERS -->
-  <section class="panel members-panel">
-    <div class="container grid-two-columns">
-      <div class="member-image-wrapper">
-        <img src="images/mrMilfNight.png" alt="Ethan the Soulful Seductor" class="member-image" />
-      </div>
-      <div class="member-info">
-        <h2>Ethan the Soulful Seductor</h2>
-        <ul>
-          <li>Singer</li>
-          <li>Guitarist</li>
-          <li>Bassist</li>
-          <li>Drummer</li>
-          <li>Sound Engineer</li>
-          <li>Producer</li>
-          <li>Lead Developer</li>
-          <li>Marketing</li>
-          <li>Manager</li>
-          <li>Chef</li>
-          <li>Gardener</li>
-          <li>Lover</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+<div class="ticker"><span>★ EVERY SHOW SOLD OUT ★ ALL MERCH GONE ★ THE GREATEST ROCK BAND TO NEVER EXIST ★ RECIPE FOR DISASTER — OUT NOW ★ MILF NIGHT FOREVER ★ EVERY SHOW SOLD OUT ★ ALL MERCH GONE ★</span></div>
 
-  <!-- MUSIC SECTION -->
-  <section class="panel music-panel">
-    <div class="container">
-      <h2>Milf Night’s Music</h2>
-      <p class="bio">
-        “Recipe for Disaster” is the greatest rock debut album that transcends genres. It’s a sonic journey encompassing a wide spectrum of sounds and styles. With a diverse range of influences, Milf Night effortlessly traverses the realms
-        of classic and hard rock, infusing performances with electrifying guitar riffs, thunderous drums, and soul-stirring vocals. Yet, the musical prowess extends beyond the sounds of rock, as they fearlessly dive into the roots of alternative music,
-        exploring catchy melodies and infectious hooks that resonate with listeners from all walks of life. From the nostalgia-inducing classics to the cutting-edge sounds of today, Milf Night’s dynamic repertoire covers every inch of the musical
-        spectrum. Whether you crave the raw energy of a hard-hitting rock anthem or the catchy melodies of an alternative pop gem, Milf Night has a song for every lady, ensuring that no audience member is left untouched by the captivating and
-        genre-defying performances.
-      </p>
+<header class="hero">
+  <p class="smol">RECIPE FOR DISASTER · DEBUT ALBUM</p>
+  <h1>MILF<br><span class="night">NIGHT</span></h1>
+  <p class="tagline">The Greatest Rock Band to <em>Never Exist</em></p>
+  <div class="hero-cta">
+    <a href="#music" class="btn">Hear the Madness</a>
+    <a href="#tour" class="btn ghost">Tour (Sold Out)</a>
+  </div>
+</header>
 
-      <div class="songs-grid">
-        <div class="song-card">
-          <h3 class="song-title">Rock n’ Roll Queen</h3>
-          <audio controls src="songs/Rock n Roll Queen.mp3"></audio>
+<section class="member">
+  <div class="wrap">
+    <p class="kicker">THE LINEUP · ONE MAN ARMY</p>
+    <div class="grid">
+      <div class="poster"><span class="name">Ethan</span></div>
+      <div>
+        <h3>Ethan the Soulful Seductor</h3>
+        <p style="margin-top:14px;color:#cfc9be;line-height:1.6">One man. Every instrument. Every role. The entire band lives in one impossibly talented human.</p>
+        <div class="roles">
+          <span>Singer</span><span>Guitarist</span><span>Bassist</span><span>Drummer</span><span>Sound Engineer</span><span>Producer</span><span>Lead Developer</span><span>Marketing</span><span>Manager</span><span>Chef</span><span>Gardener</span><span>Lover</span>
         </div>
-        <div class="song-card">
-          <h3 class="song-title">The Milf That Got Away</h3>
-          <audio controls src="songs/IHTAvox 2.mp3"></audio>
-        </div>
-        <div class="song-card">
-          <h3 class="song-title">West Coast Girls</h3>
-          <audio controls src="songs/West Coast Girls.mp3"></audio>
-        </div>
-      </div>
-      <h2>Follow The Madness</h2>
-      <div class="social-links">
-        <a href="https://open.spotify.com/show/49nxTppbgeGXE8wSyQSqw0?si=K-uqRhIASa6OP38N5JoObw" target="_blank">
-          <img src="images/spotifyIcon.png" alt="Spotify" class="social-icon" />
-        </a>
-        <a href="https://www.instagram.com/milf_night_/" target="_blank">
-          <img src="images/Instagram_Glyph_Gradient.svg" alt="Instagram" class="social-icon" />
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- TOUR DATES -->
-  <section class="panel tour-panel">
-    <div class="container">
-      <h2>Tour Dates</h2>
-      <p class="ticket-pricing">
-        <span class="price-vip">VIP: $45</span>
-        <span class="price-ga">General Admission: $25</span>
-      </p>
-
-      <div class="tour-grid">
-        <div class="tour-month-card">
-          <h3>July</h3>
-          <ul class="tour-days">
-            <li data-city="Paris">6</li>
-            <li data-city="Paris">7</li>
-            <li data-city="Paris">8</li>
-            <li data-city="Brussels">10</li>
-            <li data-city="Brussels">11</li>
-            <li data-city="Brussels">12</li>
-            <li data-city="Amsterdam">29</li>
-            <li data-city="Amsterdam">30</li>
-          </ul>
-        </div>
-        <div class="tour-month-card">
-          <h3>August</h3>
-          <ul class="tour-days">
-            <li data-city="Berlin">4</li>
-            <li data-city="Berlin">5</li>
-            <li data-city="Hamburg">11</li>
-            <li data-city="Hamburg">12</li>
-            <li data-city="Munich">18</li>
-            <li data-city="Munich">19</li>
-            <li data-city="Vienna">25</li>
-            <li data-city="Vienna">26</li>
-          </ul>
-        </div>
-        <div class="tour-month-card">
-          <h3>September</h3>
-          <ul class="tour-days">
-            <li data-city="Rome">1</li>
-            <li data-city="Rome">2</li>
-            <li data-city="Florence">9</li>
-            <li data-city="Florence">10</li>
-            <li data-city="Milan">12</li>
-            <li data-city="Milan">15</li>
-            <li data-city="Barcelona">19</li>
-            <li data-city="Barcelona">20</li>
-          </ul>
-        </div>
-      </div>
-
-      <p id="selected-date-info" class="selected-date">
-        Click on a date to view details
-      </p>
-    </div>
-  </section>
-
-  <!-- MERCHANDISE -->
-  <section class="panel merch-panel">
-    <div class="container">
-      <h2>Merchandise</h2>
-      <div class="merch-grid">
-        <div class="merch-card sold-out">
-          <div class="merch-image-wrapper">
-            <img src="images/milfNightLogo.png" alt="Milf Night Poster" />
-            <span class="sold-out-overlay">Sold Out</span>
-          </div>
-          <h3 class="merch-title">Milf Night Poster</h3>
-          <p class="merch-desc">Display anywhere you’d like.</p>
-          <p class="merch-price">$19.99</p>
-        </div>
-        <div class="merch-card sold-out">
-          <div class="merch-image-wrapper">
-            <img src="images/熟女の夜 2.png" alt="Mature Women Night Shirt" />
-            <span class="sold-out-overlay">Sold Out</span>
-          </div>
-          <h3 class="merch-title">"Mature Women Night" Shirt (Adult)</h3>
-          <p class="merch-desc">Wear whenever you’d like.</p>
-          <p class="merch-price">$24.99</p>
-        </div>
-        <div class="merch-card sold-out">
-          <div class="merch-image-wrapper">
-            <img src="images/milfNight2.png" alt="Uppies 24/7 Milf Night Shirt" />
-            <span class="sold-out-overlay">Sold Out</span>
-          </div>
-          <h3 class="merch-title">"Uppies 24/7" Milf Night Shirt (Adult)</h3>
-          <p class="merch-desc">Wear whenever you’d like.</p>
-          <p class="merch-price">$24.99</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="panel testimonials-panel">
-  <div class="container">
-    <h2>Hear From Our Fans</h2>
-    <div class="testimonials-slider">
-      <div class="testimonial active">
-        <blockquote>
-          “I caught sight of Milf Night flexing the amp knobs mid-riff, and my blood pressure shot through the roof. Best life decision ever.”
-        </blockquote>
-        <cite>— Roxie Delgado</cite>
-      </div>
-      <div class="testimonial">
-        <blockquote>
-          “Milf Night’s guitar solo made me question every life choice I’ve ever made… I then bought three T-shirts and a poster. No regrets, just euphoria.”
-        </blockquote>
-        <cite>— Tanya Alvarez</cite>
-      </div>
-      <div class="testimonial">
-        <blockquote>
-          “Milf Night was so legendary that I died.”
-        </blockquote>
-        <cite>— McKenna Nguyen</cite>
-      </div>
-      <div class="testimonial">
-        <blockquote>
-          “Went in as a casual listener, and ended up the MVP of Milf Night.”
-        </blockquote>
-        <cite>— Dana Pierce</cite>
-      </div>
-      <div class="testimonial">
-        <blockquote>
-          “I moshed once and ended up going home with Milf Night... he cooked me breakfast :)”
-        </blockquote>
-        <cite>— Megan Calander</cite>
       </div>
     </div>
   </div>
 </section>
 
-
-
-  <!-- CONTACT & FOOTER -->
-  <section class="panel contact-panel">
-    <div class="container">
-      <h2>Contact Us</h2>
-      <p>
-        For any inquiries or to contact us directly, you can email us at:
-      </p>
-      <p class="email">
-        <a href="mailto:milfnightrocknroll@gmail.com">milfnightrocknroll@gmail.com</a>
-      </p>
-      <img src="images/milfNightLogo.png" alt="MILF NIGHT Logo" class="footer-poster" />
-      <footer>
-        <p>&copy; 2025 Milf Night. All rights reserved.</p>
-      </footer>
+<section class="music" id="music">
+  <div class="wrap">
+    <p class="kicker">THE SOUND</p>
+    <h2 class="shead">MILF NIGHT'S <span class="stroke">MUSIC</span></h2>
+    <p class="bio">"Recipe for Disaster" is a genre-defying rock debut — electrifying guitar riffs, thunderous drums, and soul-stirring vocals colliding with catchy alternative hooks. From hard-hitting anthems to infectious melodies, there's a song here for every lady in the room. No audience member left untouched.</p>
+    <div class="songs">
+      <div class="song"><div class="num">01</div><h4>Rock n' Roll Queen</h4><audio controls src="songs/Rock n Roll Queen.mp3"></audio></div>
+      <div class="song"><div class="num">02</div><h4>The Milf That Got Away</h4><audio controls src="songs/IHTAvox 2.mp3"></audio></div>
+      <div class="song"><div class="num">03</div><h4>West Coast Girls</h4><audio controls src="songs/West Coast Girls.mp3"></audio></div>
     </div>
-  </section>
+    <div class="socials">
+      <a href="https://open.spotify.com/show/49nxTppbgeGXE8wSyQSqw0?si=K-uqRhIASa6OP38N5JoObw" target="_blank">Spotify ↗</a>
+      <a href="https://www.instagram.com/milf_night_/" target="_blank">Instagram ↗</a>
+    </div>
+  </div>
+</section>
 
-  <!-- MAIN JAVASCRIPT -->
-  <script src="script.js"></script>
+<section class="tour" id="tour">
+  <div class="wrap">
+    <p class="kicker">ON THE ROAD · EUROPE</p>
+    <h2 class="shead">TOUR <span class="stroke">DATES</span></h2>
+    <div class="pricing">
+      <span class="vip">VIP · $45</span>
+      <span>General Admission · $25</span>
+    </div>
+    <div class="tour-grid" id="tourGrid"></div>
+    <p class="selinfo" id="selinfo">Tap a date — every night is sold out.</p>
+  </div>
+</section>
+
+<section class="merch">
+  <div class="wrap">
+    <p class="kicker">THE GOODS · GONE FOREVER</p>
+    <h2 class="shead">MERCH <span class="stroke">DROP</span></h2>
+    <div class="merch-grid">
+      <div class="mcard">
+        <div class="mart">Milf Night Poster</div>
+        <div class="soldout"><span>Sold Out</span></div>
+        <div class="minfo"><h4>Milf Night Poster</h4><p>Display anywhere you'd like.</p><p class="price">$19.99</p></div>
+      </div>
+      <div class="mcard">
+        <div class="mart">熟女の夜 Tee</div>
+        <div class="soldout"><span>Sold Out</span></div>
+        <div class="minfo"><h4>"Mature Women Night" Shirt</h4><p>Wear whenever you'd like.</p><p class="price">$24.99</p></div>
+      </div>
+      <div class="mcard">
+        <div class="mart">Uppies 24/7 Tee</div>
+        <div class="soldout"><span>Sold Out</span></div>
+        <div class="minfo"><h4>"Uppies 24/7" Milf Night Shirt</h4><p>Wear whenever you'd like.</p><p class="price">$24.99</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fans">
+  <div class="wrap">
+    <p class="kicker">WORD ON THE STREET</p>
+    <h2 class="shead">HEAR FROM <span class="stroke">OUR FANS</span></h2>
+    <div class="quote">
+      <blockquote id="qtext"></blockquote>
+      <cite id="qcite"></cite>
+    </div>
+    <div class="dots" id="dots"></div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <p class="kicker">GET IN TOUCH</p>
+    <h2 class="shead">CONTACT <span class="stroke">US</span></h2>
+    <p style="margin-top:16px;color:#cfc9be">For inquiries or to reach the band directly:</p>
+    <a class="email" href="mailto:milfnightrocknroll@gmail.com">milfnightrocknroll@gmail.com</a>
+    <footer><p>© 2025 MILF NIGHT. All rights reserved. Every show sold out.</p></footer>
+  </div>
+</section>
+
+<script>
+const tour={
+  January:[["Paris",6],["Paris",7],["Paris",8],["Brussels",10],["Brussels",11],["Brussels",12],["Amsterdam",29],["Amsterdam",30]],
+  February:[["Berlin",4],["Berlin",5],["Hamburg",11],["Hamburg",12],["Munich",18],["Munich",19],["Vienna",25],["Vienna",26]],
+  March:[["Rome",1],["Rome",2],["Florence",9],["Florence",10],["Milan",12],["Milan",15],["Barcelona",19],["Barcelona",20]]
+};
+const grid=document.getElementById('tourGrid');
+const sel=document.getElementById('selinfo');
+Object.entries(tour).forEach(([m,days])=>{
+  const c=document.createElement('div');c.className='month';
+  c.innerHTML=`<h3>${m}</h3><ul class="dates">${days.map(([city,d])=>
+    `<li data-city="${city}" data-month="${m}" data-day="${d}"><span class="day">${d}</span><span class="city">${city}</span><span class="so">Sold Out</span></li>`).join('')}</ul>`;
+  grid.appendChild(c);
+});
+grid.addEventListener('click',e=>{
+  const li=e.target.closest('li');if(!li)return;
+  sel.textContent=`${li.dataset.city} · ${li.dataset.month} ${li.dataset.day} — SOLD OUT 🔥`;
+});
+
+const fans=[
+  ["I caught sight of Milf Night flexing the amp knobs mid-riff, and my blood pressure shot through the roof. Best life decision ever.","Roxie Delgado"],
+  ["Milf Night's guitar solo made me question every life choice I've ever made… I then bought three T-shirts and a poster. No regrets, just euphoria.","Tanya Alvarez"],
+  ["Milf Night was so legendary that I died.","McKenna Nguyen"],
+  ["Went in as a casual listener, and ended up the MVP of Milf Night.","Dana Pierce"],
+  ["I moshed once and ended up going home with Milf Night... he cooked me breakfast :)","Megan Calander"]
+];
+const qt=document.getElementById('qtext'),qc=document.getElementById('qcite'),dots=document.getElementById('dots');
+let cur=0;
+fans.forEach((_,i)=>{const b=document.createElement('button');b.onclick=()=>show(i);dots.appendChild(b)});
+function show(i){cur=i;qt.textContent=fans[i][0];qc.textContent='— '+fans[i][1];
+  [...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i));}
+show(0);
+setInterval(()=>show((cur+1)%fans.length),5000);
+</script>
 </body>
 </html>
