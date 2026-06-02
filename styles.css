@@ -1,18 +1,19 @@
 :root {
   /* COLORS */
-  --bg-dark: #111;
-  /* deep charcoal/black */
-  --accent-1: #e91e63;
-  /* neon pink */
-  --accent-2: #00e676;
-  /* electric lime */
-  --text-light: #fafafa;
-  /* off-white */
-  --text-muted: #ccc;
-  /* light gray for subtext */
+  --bg-dark: #0d0814;          /* deep charcoal with a violet undertone */
+  --accent-1: #b026ff;         /* neon purple (primary) */
+  --accent-1-soft: #c97bff;    /* lighter purple for text/hover */
+  --accent-2: #00e676;         /* electric lime (kept as secondary pop) */
+  --text-light: #fafafa;       /* off-white */
+  --text-muted: #b9b1c9;       /* muted lavender-gray for subtext */
+  --panel-1: #16101f;          /* lighter panel surface */
+  --panel-2: #1d1430;          /* card surface */
+  --glow-purple: rgba(176, 38, 255, 0.55);
+
   /* TYPOGRAPHY */
   --font-body: 'Poppins', sans-serif;
   --font-display: 'Bangers', cursive;
+
   /* SPACING */
   --sp-small: 0.5rem;
   --sp-medium: 1rem;
@@ -39,8 +40,13 @@ body {
   background-color: var(--bg-dark);
   color: var(--text-light);
   font-family: var(--font-body);
-  line-height: 1.5;
+  line-height: 1.6;
   overflow-x: hidden;
+  /* Subtle layered glow so the background isn't a flat black */
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(176, 38, 255, 0.12), transparent 40%),
+    radial-gradient(circle at 85% 100%, rgba(0, 230, 118, 0.07), transparent 45%);
+  background-attachment: fixed;
 }
 
 /* Utility container to constrain width */
@@ -60,7 +66,17 @@ h4 {
   color: var(--accent-1);
   margin-bottom: var(--sp-small);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 18px var(--glow-purple);
+}
+
+/* Big section headers get a touch more drama + sizing that scales */
+.music-panel h2,
+.tour-panel > .container > h2,
+.merch-panel h2,
+.testimonials-panel h2,
+.contact-panel h2 {
+  font-size: clamp(2rem, 6vw, 3.25rem);
 }
 
 p,
@@ -73,11 +89,12 @@ li {
 a {
   color: var(--accent-2);
   text-decoration: none;
-  transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
 }
 
 a:hover {
-  color: var(--accent-1);
+  color: var(--accent-1-soft);
+  text-shadow: 0 0 12px var(--glow-purple);
 }
 
 /* ----------------------------------------
@@ -87,12 +104,8 @@ a:hover {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--sp-large);
-}
-
-@media (max-width: 768px) {
-  .grid-two-columns {
-    grid-template-columns: 1fr;
-  }
+  justify-items: center;
+  align-items: center;
 }
 
 .songs-grid,
@@ -106,83 +119,113 @@ a:hover {
 /* ----------------------------------------
    HEADER / HERO
    ---------------------------------------- */
-   /* ----------------------------------------
-      HEADER / HERO (adjusted)
-      ---------------------------------------- */
-   .header-panel {
-     /* If you’d like, you can change or remove this background */
-     background: linear-gradient(
-       135deg,
-       rgba(30, 0, 60, 0.9),
-       rgba(0, 0, 0, 0.8)
-     );
-     height: 80vh;                  /* Keep the header tall */
-     display: flex;
-     align-items: center;           /* Center vertically */
-     justify-content: center;       /* Center horizontally */
-     text-align: center;
-   }
-
-   /* Enlarge the logo image */
-   .logo {
-  width: 550px;
-  max-width: 90%;
-  height: auto;
-
-  /* Keep the pop-in animation on page load (runs once) */
-  animation:
-    logo-pop 1s ease-out both,
-    /* Then start the pulse, 3s duration, ease-in-out, infinite loop */
-    logo-pulse 3s ease-in-out 2s infinite;
-    /* ↑ the “2s” here is a delay: it waits 2s after pop finishes before pulsing */
+.header-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(45, 0, 90, 0.92),
+    rgba(0, 0, 0, 0.85)
+  );
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Optional: if you want the pop portion faster or slower, just adjust “logo-pop 1s …” */
+/* Animated glow orb behind the logo for atmosphere */
+.header-panel::after {
+  content: "";
+  position: absolute;
+  width: 70vmin;
+  height: 70vmin;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow-purple), transparent 65%);
+  filter: blur(40px);
+  z-index: 0;
+  animation: orb-drift 8s ease-in-out infinite alternate;
+}
 
+.header-panel .container {
+  position: relative;
+  z-index: 1;
+}
 
-   /* You can remove or comment out the band-title and tagline rules if you no longer need them:
-   .band-title { display: none; }
-   .tagline   { display: none; }
-   */
+@keyframes orb-drift {
+  0%   { transform: translateY(-4%) scale(1);    opacity: 0.7; }
+  100% { transform: translateY(4%)  scale(1.12); opacity: 1; }
+}
 
-   /* Optionally, if you prefer to entirely disable the pop/fade animation now that there’s no text, override these: */
-   @keyframes logo-pulse {
+.logo {
+  width: 550px;
+  max-width: 85%;
+  height: auto;
+  animation:
+    logo-pop 1s ease-out both,
+    logo-pulse 3s ease-in-out 2s infinite;
+}
+
+.tagline {
+  margin-top: var(--sp-medium);
+  font-size: clamp(1rem, 3.5vw, 1.5rem);
+  color: var(--text-light);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fade-up 1s ease-out 0.6s both;
+}
+
+@keyframes logo-pop {
+  0%   { transform: scale(0.6); opacity: 0; }
+  70%  { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fade-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes logo-pulse {
   0% {
     transform: scale(1);
-    filter: drop-shadow(0 0 0 rgba(233, 30, 99, 0)); /* no glow */
+    filter: drop-shadow(0 0 0 rgba(176, 38, 255, 0));
   }
   50% {
-    transform: scale(1.05);                            /* grow to 105% */
-    filter: drop-shadow(0 0 15px rgba(233, 30, 99, 0.6)); /* subtle pink glow */
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 22px var(--glow-purple));
   }
   100% {
     transform: scale(1);
-    filter: drop-shadow(0 0 0 rgba(233, 30, 99, 0)); /* back to no glow */
+    filter: drop-shadow(0 0 0 rgba(176, 38, 255, 0));
   }
 }
-
 
 /* ----------------------------------------
    BAND MEMBERS SECTION
    ---------------------------------------- */
 .members-panel {
-  background-color: #1a1a1a;
-  /* slightly lighter than pure black */
+  background-color: var(--panel-1);
   padding: var(--sp-large) 0;
 }
 
-/* Already have this for the circle crop: */
 .member-image-wrapper {
   width: 300px;
   height: 300px;
+  max-width: 80vw;
+  max-height: 80vw;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
-  transition: transform 0.3s ease;
+  box-shadow: 0 0 0 3px var(--accent-1), 0 8px 30px var(--glow-purple);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .member-image-wrapper:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 0 3px var(--accent-1-soft), 0 12px 40px var(--glow-purple);
 }
+
 .member-image {
   width: 100%;
   height: 100%;
@@ -190,39 +233,24 @@ a:hover {
   display: block;
 }
 
-/* Update here: */
-.grid-two-columns {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--sp-large);
-
-  /* Center everything inside each column: */
-  justify-items: center;
-  align-items: center; /* optional, if you also want vertical centering */
-}
-
-/* You may already have something like: */
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--sp-medium) 0;
-}
-
 .member-info h2 {
-  font-size: 2rem;
+  font-size: clamp(1.6rem, 5vw, 2.25rem);
   color: var(--accent-1);
 }
 
 .member-info ul {
   list-style: none;
   margin-top: var(--sp-small);
+  /* On wide rows the long list reads better in two columns */
+  columns: 2;
+  column-gap: var(--sp-large);
 }
 
 .member-info li {
   margin-bottom: var(--sp-small);
-  padding-left: 1rem;
+  padding-left: 1.4rem;
   position: relative;
+  break-inside: avoid;
 }
 
 .member-info li::before {
@@ -236,7 +264,7 @@ a:hover {
    MUSIC SECTION
    ---------------------------------------- */
 .music-panel {
-  background: radial-gradient(circle at top left, #2a0d36, #000);
+  background: radial-gradient(circle at top left, #2a0d44, #000);
   padding: var(--sp-large) 0;
 }
 
@@ -249,7 +277,7 @@ a:hover {
   text-align: center;
   max-width: 700px;
   margin: 0 auto var(--sp-large);
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
   color: var(--text-light);
 }
 
@@ -258,16 +286,19 @@ a:hover {
 }
 
 .song-card {
-  background-color: #222;
+  background-color: var(--panel-2);
   padding: var(--sp-medium);
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  transition: transform 0.2s ease, background-color 0.3s ease;
+  border-radius: 12px;
+  border: 1px solid rgba(176, 38, 255, 0.15);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .song-card:hover {
-  transform: translateY(-5px);
-  background-color: #2c1a3e;
+  transform: translateY(-6px);
+  background-color: #2c1a4e;
+  border-color: var(--accent-1);
+  box-shadow: 0 10px 28px var(--glow-purple);
 }
 
 .song-title {
@@ -290,18 +321,19 @@ a:hover {
 .social-icon {
   width: 50px;
   margin: 0 var(--sp-small);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .social-icon:hover {
   transform: scale(1.2) rotate(10deg);
+  filter: drop-shadow(0 0 12px var(--glow-purple));
 }
 
 /* ----------------------------------------
    TOUR DATES SECTION
    ---------------------------------------- */
 .tour-panel {
-  background-color: #0f0f0f;
+  background-color: #0a0710;
   padding: var(--sp-large) 0;
   text-align: center;
   color: var(--text-light);
@@ -310,11 +342,14 @@ a:hover {
 .ticket-pricing {
   margin-bottom: var(--sp-large);
   font-size: 1.1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-medium);
 }
 
 .price-vip {
-  color: var(--accent-1);
-  margin-right: var(--sp-medium);
+  color: var(--accent-1-soft);
 }
 
 .price-ga {
@@ -329,17 +364,19 @@ a:hover {
 }
 
 .tour-month-card {
-  background-color: #1e1e1e;
+  background-color: var(--panel-2);
   padding: var(--sp-medium);
-  border-radius: 8px;
+  border-radius: 12px;
   width: 200px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-  transition: transform 0.2s ease, background-color 0.3s ease;
+  border: 1px solid rgba(176, 38, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .tour-month-card:hover {
-  transform: translateY(-5px);
-  background-color: #2a2a2a;
+  transform: translateY(-6px);
+  border-color: var(--accent-1);
+  box-shadow: 0 10px 26px var(--glow-purple);
 }
 
 .tour-month-card h3 {
@@ -355,33 +392,35 @@ a:hover {
 .tour-days li {
   margin-bottom: var(--sp-small);
   padding: var(--sp-small);
-  background-color: #111;
-  border-radius: 4px;
+  background-color: #120c1c;
+  border-radius: 6px;
   color: var(--text-light);
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .tour-days li:hover {
-  background-color: #2a0d36;
+  background-color: #2a0d44;
+  color: var(--accent-1-soft);
 }
 
 .tour-days li.selected {
-  background-color: var(--accent-2);
-  color: #111;
+  background-color: var(--accent-1);
+  color: #fff;
+  box-shadow: 0 0 14px var(--glow-purple);
 }
 
 #selected-date-info {
   margin-top: var(--sp-large);
   font-size: 1.1rem;
-  color: var(--accent-2);
+  color: var(--accent-1-soft);
 }
 
 /* ----------------------------------------
    MERCHANDISE SECTION
    ---------------------------------------- */
 .merch-panel {
-  background: linear-gradient(135deg, #2b0c3c, #000);
+  background: linear-gradient(135deg, #2b0c4c, #000);
   padding: var(--sp-large) 0;
 }
 
@@ -390,17 +429,19 @@ a:hover {
 }
 
 .merch-card {
-  background-color: #111;
-  border-radius: 8px;
+  background-color: var(--panel-1);
+  border-radius: 12px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  border: 1px solid rgba(176, 38, 255, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .merch-card:hover {
-  transform: translateY(-5px);
-  background-color: #222;
+  transform: translateY(-6px);
+  border-color: var(--accent-1);
+  box-shadow: 0 10px 30px var(--glow-purple);
 }
 
 .merch-image-wrapper {
@@ -424,11 +465,13 @@ a:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.8);
-  color: var(--accent-1);
+  color: var(--accent-1-soft);
   font-family: var(--font-display);
   font-size: 1.5rem;
+  letter-spacing: 1px;
   padding: var(--sp-small) var(--sp-medium);
-  border-radius: 4px;
+  border-radius: 6px;
+  border: 1px solid var(--accent-1);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -441,28 +484,34 @@ a:hover {
   font-size: 1.2rem;
   color: var(--accent-2);
   text-align: center;
-  margin: var(--sp-small) 0;
+  margin: var(--sp-small) var(--sp-small) 0;
 }
 
 .merch-desc {
   text-align: center;
   color: var(--text-muted);
-  margin-bottom: var(--sp-small);
+  margin: var(--sp-small);
 }
 
 .merch-price {
   text-align: center;
   color: var(--text-light);
-  margin-bottom: var(--sp-small);
+  margin-bottom: var(--sp-medium);
+  font-weight: 600;
 }
 
 /* ----------------------------------------
    TESTIMONIALS SECTION
    ---------------------------------------- */
 .testimonials-panel {
-  background-color: #111;
+  background-color: var(--panel-1);
   padding: var(--sp-large) 0;
   position: relative;
+}
+
+.testimonials-panel h2 {
+  text-align: center;
+  margin-bottom: var(--sp-large);
 }
 
 .testimonials-slider {
@@ -470,6 +519,7 @@ a:hover {
   max-width: 800px;
   margin: 0 auto;
   overflow: hidden;
+  padding: 0 var(--sp-medium);
 }
 
 .testimonial {
@@ -487,25 +537,26 @@ a:hover {
 }
 
 .testimonial blockquote {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
   font-style: italic;
   color: var(--text-light);
   text-align: center;
-  margin-bottom: var(--sp-small);
+  margin-bottom: var(--sp-medium);
+  line-height: 1.5;
 }
 
 .testimonial cite {
   display: block;
   text-align: right;
   font-size: 1rem;
-  color: var(--accent-2);
+  color: var(--accent-1-soft);
 }
 
 /* ----------------------------------------
    CONTACT & FOOTER
    ---------------------------------------- */
 .contact-panel {
-  background-color: #1a0a2a;
+  background-color: #160a26;
   padding: var(--sp-large) 0;
   text-align: center;
   color: var(--text-light);
@@ -531,10 +582,83 @@ a:hover {
   width: 150px;
   margin: var(--sp-medium) 0;
   opacity: 0.8;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.footer-poster:hover {
+  opacity: 1;
+  filter: drop-shadow(0 0 14px var(--glow-purple));
 }
 
 footer {
   margin-top: var(--sp-small);
   font-size: 0.9rem;
   color: var(--text-muted);
+}
+
+/* ----------------------------------------
+   RESPONSIVE / MOBILE
+   ---------------------------------------- */
+@media (max-width: 768px) {
+  .grid-two-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .header-panel {
+    min-height: 70vh;
+  }
+
+  .member-info {
+    text-align: center;
+  }
+
+  .member-info ul {
+    columns: 1;
+    display: inline-block;
+    text-align: left;
+  }
+
+  .tour-month-card {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .tour-grid {
+    gap: var(--sp-medium);
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container {
+    width: 92%;
+  }
+
+  .songs-grid,
+  .merch-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .social-icon {
+    width: 44px;
+  }
+
+  .sold-out-overlay {
+    font-size: 1.25rem;
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
